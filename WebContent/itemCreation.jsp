@@ -60,7 +60,7 @@
   	  	con.close();
   	}
   	
-  	response.sendRedirect("index.jsp");
+  	response.sendRedirect("auctionCreate.jsp");
 %>
 </body>
 </html>
