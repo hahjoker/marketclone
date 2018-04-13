@@ -15,15 +15,21 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
             "hahjoker", "rootroot");
     ResultSet rs;
-    String seq= "SELECT * from ccredentials WHERE username= ? and password =?";
+    String seq= "SELECT * from credentials WHERE username= ? and password =?";
 	PreparedStatement ps = con.prepareStatement(seq);
   	ps.setString(1, user);
   	ps.setString(2, pwd);
-    rs = ps.executeQuery();
+    rs = ps.executeQuery();  
     if (rs.next()) {
         session.setAttribute("userid", user);
-        response.sendRedirect("success.jsp");
-    } else {
+        int i = rs.getInt(7);
+        if(i == 1)
+        	response.sendRedirect("success.jsp");
+        else{
+            response.sendRedirect("adminpage.jsp");
+        }
+    }
+    else {
         out.println("Invalid password! <a href='index.jsp'>try again</a>");
     }
 %>

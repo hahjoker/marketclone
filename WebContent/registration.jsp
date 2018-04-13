@@ -17,13 +17,15 @@
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
             "hahjoker", "rootroot");
-  	String insert1= "INSERT INTO ccredentials VALUES(?,?,?,?,?)";
+  	String insert1= "INSERT INTO credentials VALUES(?,?,?,?,?,?,?)";
   	PreparedStatement ps = con.prepareStatement(insert1);
   	ps.setString(1, fname);
   	ps.setString(2, lname);
   	ps.setString(3, email);
   	ps.setString(4, user);
   	ps.setString(5, pass);
+  	ps.setInt(6,1);
+  	ps.setInt(7,1);
   	ps.executeUpdate();
   	con.close();
   	out.print("man can dream???");
