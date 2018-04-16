@@ -20,6 +20,8 @@ Welcome
 session.getAttribute("userid")
 %>
 <div></div>
+<a href='itemFrontEnd.jsp'>Create new Listing</a>
+<div></div>
 <a href='logout.jsp'>Log out</a>
 <%    }
 %>

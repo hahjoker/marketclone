@@ -11,7 +11,8 @@
 <%
 	String user = (String) session.getAttribute("userid");
 	String itemname = request.getParameter("itemname");
-	String condition = request.getParameter("cond");
+	String phoneType = request.getParameter("OS");
+	String cond = request.getParameter("cond");
 	String manufacturer = request.getParameter("manufacturer");
 	String description = request.getParameter("desc");
 	String type = request.getParameter("type");
@@ -21,46 +22,27 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
             "hahjoker", "rootroot");
     
-    if(type == "Android") {
-  		String insert1 = "INSERT INTO phones_android VALUES(?,?,?,?,?,?)";
+  		String insert1 = "INSERT INTO phones(user,itemname,conditionPhone,manufacturer,description,phoneOS,color) VALUES(?,?,?,?,?,?,?)";
   		PreparedStatement ps = con.prepareStatement(insert1);
   	  	ps.setString(1, user);
   	  	ps.setString(2, itemname);
-  	  	ps.setString(3, condition);
-  	  	ps.setString(4, description);
-  	  	ps.setString(5, manufacturer);
-	  	ps.setString(6, color);
+  	  	ps.setString(3, cond);
+  	  	ps.setString(4, manufacturer);
+  	  	ps.setString(5, description);
+	  	ps.setString(6, phoneType);
+	  	ps.setString(7, color);
   	  	ps.executeUpdate();
-  	  	con.close();
-    }
   	  	
-  	if(type == "iPhone") {
-  		String insert1 = "INSERT INTO phones_iPhone VALUES(?,?,?,?,?,?)";
-  		PreparedStatement ps = con.prepareStatement(insert1);
-  	  	ps.setString(1, user);
-  	  	ps.setString(2, itemname);
-  	  	ps.setString(3, condition);
-  	  	ps.setString(4, description);
-  	  	ps.setString(5, manufacturer);
-	  	ps.setString(6, color);
-  	  	ps.executeUpdate();
-  	  	con.close();
-  	}
-  	
-  	if(type == "Other") {
-  		String insert1 = "INSERT INTO phones_Other VALUES(?,?,?,?,?,?)";
-  		PreparedStatement ps = con.prepareStatement(insert1);
-  	  	ps.setString(1, user);
-  	  	ps.setString(2, itemname);
-  	  	ps.setString(3, condition);
-  	  	ps.setString(4, description);
-  	 	ps.setString(5, manufacturer);
-	  	ps.setString(6, color);
-  	  	ps.executeUpdate();
-  	  	con.close();
-  	}
-  	
-  	response.sendRedirect("auctionCreate.jsp");
+  	  	String query = "SELECT itemid FROM phones ORDER BY itemid DESC LIMIT 1";
+  	 	PreparedStatement psrs = con.prepareStatement(query);
+	    ResultSet rs = psrs.executeQuery();
+	    rs.next();
+		int itemid = rs.getInt("itemid");
+		con.close();
+		session.setAttribute("itemid", itemid);
+		//session.setAttribute("comingfrom", 0);
 %>
+		<name="itemid" value="<%= itemid %>">
+		<%response.sendRedirect("auctionCreate.jsp"); %>
 </body>
 </html>

@@ -17,6 +17,8 @@
 			<button type="submit" id="login-button">Login</button>
 			<div></div>
             If you're not registered with us yet -> <a href="reg.jsp">Register Here</a>
+            <div></div>
+            To search active listings, click here! -> <a href="search.jsp">Search</a>
         </form>
         </div>
         </div>

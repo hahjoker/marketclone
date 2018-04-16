@@ -17,9 +17,9 @@
 				<td>
 					<select name="OS">
 					    <option value="0"> </option>
-					    <option value="1">Android</option>
-					    <option value="2">iOS</option>
-					    <option value="3">Other</option>
+					    <option value="Android">Android</option>
+					    <option value="iOS">iOS</option>
+					    <option value="Other">Other</option>
 					</select>				
 				</td>
 			</tr>
@@ -31,24 +31,23 @@
 				<td>
 					<select name="manufacturer">
 					    <option value="0"> </option>
-					    <option value="1">Google</option>
-					    <option value="2">Apple</option>
-					    <option value="3">Samsung</option>
-					    <option value="3">Other</option>
+					    <option value="Google">Google</option>
+					    <option value="Apple">Apple</option>
+					    <option value="Samsung">Samsung</option>
+					    <option value="Other">Other</option>
 					</select>	
 				</td>
 			</tr>
 			<tr>
 				<td> 
-					Sort By:
+					Search By Condition:
 				</td>
 				<td>
 					<select name="condition">
 					    <option value="0"> </option>
-					    <option value="1">Lowest Price</option>
-					    <option value="2">Highest Price</option>
-					    <option value="3">Newest</option>
-					    <option value="3">Oldest</option>
+					    <option value="Brand New">Brand New</option>
+					    <option value="Like New">Like New</option>
+					    <option value="Used">Used</option>
 					</select>	
 				</td>
 			</tr>
