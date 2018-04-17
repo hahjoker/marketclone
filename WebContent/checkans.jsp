@@ -22,13 +22,11 @@
 		   	String subcat = request.getParameter("threadId");
 			i= Integer.parseInt(subcat);
 			session.setAttribute("threadId", subcat);
-			System.out.println("HELPHELPHELPSET   "+subcat);
    		}
    		else
    		{
    			String subcat=(String) session.getAttribute("threadId");
    			i= Integer.parseInt(subcat);
-   			System.out.println("HELPHELPHELPREAD   "+i);
    		}
 		Class.forName("com.mysql.jdbc.Driver");
 	   Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",

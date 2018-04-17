@@ -22,6 +22,7 @@
   	ps.setString(3, uname);
   	ps.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
   	ps.executeUpdate();
+	response.sendRedirect("askq.jsp");
   	con.close();
 %>
 </body>
