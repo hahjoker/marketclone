@@ -13,6 +13,10 @@
 	    <tr>
 	         <td><b>Account Username</b></td>
 	         <td><b>Actions</b></td>
+	           <%
+	           if(session.getAttribute("isrep") == (Object)1){%>
+	           <td><b>Modify</b></td>
+	           <%} %>
 	    </tr>
 	<%
 
@@ -25,28 +29,31 @@
 	 	    ResultSet rs = ps.executeQuery();
 	 	   while (rs.next()) {
 	 		  %>
+	 		  	<form action="bidPersonHistory.jsp" method = "post">
 	 		  	
 	 		  	<tr>
-	 		  	<form action="bidPersonHistory.jsp" method = "post">
 	 		  		<%String usernameHistory = rs.getString("username");%>
 	 		  		<td><%out.println(usernameHistory);%></td>
 		            <td id="buttonrow">
            				 <input type="submit" value="See Bid History">
         			</td>
+        			<input type="hidden" name="usernameHistory" value="<%=usernameHistory%>">
+	            
 	            </form>
-        		<%if(session.getAttribute("isrep") == (Object)1){%>
-				<form action="modifyinfo.jsp" method = "post">
-        			<td>
-        				 <td id="buttonrow">
+	           <%
+	           if(session.getAttribute("isrep") == (Object)1){%>
+	           <form action="modify.jsp" method = "post">
+	 		  	
+		            <td id="buttonrow">
            				 <input type="submit" value="Modify">
         			</td>
-	            </form>
-	            <%} %>
         			<input type="hidden" name="usernameHistory" value="<%=usernameHistory%>">
-	            </tr>
-	 	      
-	 	     <%
-	 	} %>
+	            
+	            </form>
+	
+	 	     <%	 	}
+	           %></tr><%
+	 	   } %>
 	    </table>
 </body>
 </html>

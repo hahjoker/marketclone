@@ -16,7 +16,6 @@
 				</td>
 				<td>
 					<select name="OS">
-					    <option value="0"> </option>
 					    <option value="Android">Android</option>
 					    <option value="iOS">iOS</option>
 					    <option value="Other">Other</option>

@@ -7,6 +7,8 @@
 <title>Customer Representative</title>
 </head>
 <body>
+<h1
+		style="text-align: center; font-family: Sans-serif; margin-top: 10%;">Customer Representative:</h1>
 	<form action="checkq.jsp" method="post">
 		<tr>
 			<td id="buttonrow"><input type="submit" value="Answer Questions"></td>

@@ -22,20 +22,23 @@
     rs = ps.executeQuery();  
     if (rs.next()) {
         session.setAttribute("userid", user);
-        int i = rs.getInt(7);
-        if(i == 1)
-        {
-        	response.sendRedirect("success.jsp");
-        	session.setAttribute("isAdmin", "");
+        session.setAttribute("isrep", rs.getInt("isrep"));
+        if(session.getAttribute("isrep") == (Object)1){
+        	response.sendRedirect("customerrep.jsp");
         }
         else{
-        	session.setAttribute("isAdmin", "TRUE");
-            response.sendRedirect("adminpage.jsp");
+	        int i = rs.getInt(7);
+	        if(i == 1)
+	        	response.sendRedirect("success.jsp");
+	        else{
+	            response.sendRedirect("adminpage.jsp");
+	        }
         }
     }
     else {
         out.println("Invalid password! <a href='index.jsp'>try again</a>");
     }
+    con.close();
 %>
 </body>
 </html>

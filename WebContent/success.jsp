@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Test-Try Page</title>
+<title>Main Page</title>
 </head>
 <body>
 <%
     if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
 %>
 You are not logged in.<br/>
-<a href="login.jsp.jsp">Please Login.</a>
+<a href="login.jsp">Please Login.</a>
 <%
 } else {
 %>

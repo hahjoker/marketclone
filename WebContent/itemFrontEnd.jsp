@@ -41,8 +41,7 @@
 				<option value="Apple">Apple</option>
 				<option value="Google">Google</option>
 				<option value="Samsung">Samsung</option>
-				<option value="HTC">HTC</option>
-				<option value="Nokia">Nokia</option>
+				<option value="Other">Other</option>
 		</select></td>
 		<div></div>
 		Phone Color: <input type="text" name="color" />
