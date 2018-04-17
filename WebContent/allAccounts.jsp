@@ -38,11 +38,10 @@
            				 <input type="submit" value="See Bid History">
         			</td>
         			<input type="hidden" name="usernameHistory" value="<%=usernameHistory%>">
-	            
 	            </form>
 	           <%
 	           if(session.getAttribute("isrep") == (Object)1){%>
-	           <form action="modify.jsp" method = "post">
+	           <form action="modifyfrontend.jsp" method = "post">
 	 		  	
 		            <td id="buttonrow">
            				 <input type="submit" value="Modify">
@@ -55,5 +54,8 @@
 	           %></tr><%
 	 	   } %>
 	    </table>
+	    <div></div>
+<a href='success.jsp'>Home Pagey</a>
+<div></div>
 </body>
 </html>

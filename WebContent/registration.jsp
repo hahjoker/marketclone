@@ -25,14 +25,13 @@
   	ps.setString(3, email);
   	ps.setString(4, user);
   	ps.setString(5, pass);
-  	if(adminlock.equals("0"))
+  	if(adminlock.equals("1"))
   		ps.setInt(6,0);
   	else
   		ps.setInt(6,1);
   	ps.setInt(7,1);
   	ps.executeUpdate();
   	con.close();
-  	out.print("man can dream???");
   	response.sendRedirect("index.jsp");
 %>
 </body>

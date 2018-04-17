@@ -70,7 +70,6 @@
 		<% String seq2= "SELECT bidPerson, bidDate, bidAmount FROM bidsPlaced WHERE itemid = ?";
 		PreparedStatement ps2 = con.prepareStatement(seq2);
 		ps2.setInt(1, Integer.parseInt(itemid));
-		System.out.println(ps2.toString());
 		ResultSet rs2 = ps2.executeQuery(); 
 		if(!rs2.next()){%>
 		<td>

@@ -34,6 +34,9 @@ session.getAttribute("userid")
 <a href='customerrep.jsp'>Customer Representative Menu</a></div>
 <%} %>
 <div></div>
+<div></div>
+<a href='allAccounts.jsp'>View All User History</a>
+<div></div>
 <a href='logout.jsp'>Log out</a>
 <div></div>
 <a href='viewMessages.jsp'>View Your Messages</a>
