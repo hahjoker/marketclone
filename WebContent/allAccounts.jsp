@@ -25,17 +25,25 @@
 	 	    ResultSet rs = ps.executeQuery();
 	 	   while (rs.next()) {
 	 		  %>
-	 		  	<form action="bidPersonHistory.jsp" method = "post">
 	 		  	
 	 		  	<tr>
+	 		  	<form action="bidPersonHistory.jsp" method = "post">
 	 		  		<%String usernameHistory = rs.getString("username");%>
 	 		  		<td><%out.println(usernameHistory);%></td>
 		            <td id="buttonrow">
            				 <input type="submit" value="See Bid History">
         			</td>
+	            </form>
+        		<%if(session.getAttribute("isrep") == (Object)1){%>
+				<form action="modifyinfo.jsp" method = "post">
+        			<td>
+        				 <td id="buttonrow">
+           				 <input type="submit" value="Modify">
+        			</td>
+	            </form>
+	            <%} %>
         			<input type="hidden" name="usernameHistory" value="<%=usernameHistory%>">
 	            </tr>
-	            </form>
 	 	      
 	 	     <%
 	 	} %>

@@ -27,6 +27,12 @@ session.getAttribute("userid")
 <a href='itemFrontEnd.jsp'>Create new Listing</a>
 <div>
 <a href='search.jsp'>Search active Listings</a></div>
+<div>
+<a href='askq.jsp'>Have any questions?</a></div>
+<div>
+<%if(session.getAttribute("isrep") == (Object)1){%>
+<a href='customerrep.jsp'>Customer Representative Menu</a></div>
+<%} %>
 <div></div>
 <a href='logout.jsp'>Log out</a>
 <div></div>

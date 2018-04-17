@@ -41,6 +41,13 @@
 			<h3>Congratulations!</h3> 
 				You have successfully placed a bid for <%out.println(bidAmount.toString());%>
 			</td>
+			<form action="BidHistory.jsp" method="post">
+			<tr>
+				<input type="hidden" name="itemid" value="<%=itemid %>">
+				<td id="buttonrow"><input type="submit" value="Back">
+				</td>
+			</tr>
+		</form>
 
 		</tr>
 		<% String seq2 = "INSERT INTO bidsPlaced (itemid, bidPerson, bidDate, bidAmount) VALUES (?,?,NOW(),?)";

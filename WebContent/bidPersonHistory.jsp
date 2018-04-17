@@ -14,7 +14,7 @@
 		<tr>
 			<td><b>For Sale By</b></td>
 			<td><b>Item Name</b></td>
-			<td><b><h3>Bid Amount</h3></b></td>
+			<td><b><h3>Bid Amount</b></h3></td>
 			<td><b>Bid Date</b></td>
 		</tr>
 		<%
@@ -36,7 +36,7 @@
 			<td>
 			<%out.print(rs.getString("itemname"));%>
 			<form action="BidHistory.jsp" method="post">
-					<id="buttonrow"><input type="submit" value="Item History">
+					<id="buttonrow"><input type="submit" value="See Item">
 				<input type="hidden" name="itemid" value="<%=rs.getInt("itemid")%>">
 				<input type="hidden" name="itemname" value="<%=rs.getString("itemname")%>">
 			</form>
@@ -46,8 +46,18 @@
 			</td>
 			<td>
 				<%out.println(rs.getString("bidDate"));
-				}%>
+				%>
 			</td>
+			<%if(session.getAttribute("isrep") == (Object)1){%>
+			
+			<form action="removebid.jsp" method="post">
+					<td id="buttonrow"><input type="submit" value="Remove"> </td>
+					<input type="hidden" name="bidId" value="<%=rs.getObject("bidDate")%>">
+				
+			</form>
+				
+			
+			<%}}%>
 		</tr>
 		</table>
 </body>
