@@ -20,6 +20,8 @@ Welcome
 session.getAttribute("userid")
 %>
 <div></div>
+<a href='manualRefresh.jsp'>Refresh Page Data</a>
+<div></div>
 <a href='yourListings.jsp'>Your Active Listings</a>
 <div></div>
 <a href='itemFrontEnd.jsp'>Create new Listing</a>
@@ -27,6 +29,9 @@ session.getAttribute("userid")
 <a href='search.jsp'>Search active Listings</a></div>
 <div></div>
 <a href='logout.jsp'>Log out</a>
+<div></div>
+<a href='viewMessages.jsp'>View Your Messages</a>
+<div></div>
 <%    }
 %>
 </body>

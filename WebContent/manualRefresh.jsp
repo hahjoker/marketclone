@@ -19,10 +19,11 @@
 			itemid = rs.getInt("itemid");
 			Double reserve = rs.getDouble("reserve");
 			if(reserve != null && rs.getDouble("maxBid") > reserve) {
-				String sendMessage = "INSERT INTO messages(username, message, timestamp) VALUES (?,?,NOW())";
+				String sendMessage = "INSERT INTO messages(sentTo, message, timestamp, sentFrom) VALUES (?,?,NOW(), ?)";
 				PreparedStatement ps2 = con.prepareStatement(sendMessage);
 				ps2.setString(1, rs.getString("bidPerson"));
 				ps2.setString(2, "Congratulations! You have won the auction for item number " + rs.getInt("itemid"));
+				ps2.setString(3, "SYSTEM");
 				ps2.executeUpdate();
 				String sendOld = "INSERT INTO oldListings(itemid, soldFor, soldTo, timeSold) VALUES (?,?,?,NOW())";
 				PreparedStatement ps3 = con.prepareStatement(sendOld);
@@ -47,10 +48,11 @@
 				ps4.setInt(1, itemid);
 				ps4.execute();
 			} else {
-				String sendMessage = "INSERT INTO messages(username, message, timestamp) VALUES (?,?,NOW())";
+				String sendMessage = "INSERT INTO messages(sentTo, message, timestamp, sentFrom) VALUES (?,?,NOW(),?)";
 				PreparedStatement ps2 = con.prepareStatement(sendMessage);
 				ps2.setString(1, rs.getString("bidPerson"));
 				ps2.setString(2, "Congratulations! You have won the auction for item number " + rs.getInt("itemid"));
+				ps2.setString(3, "SYSTEM");
 				ps2.executeUpdate();
 				String sendOld = "INSERT INTO oldListings(itemid, timeSold) VALUES (?, NOW())";
 				PreparedStatement ps3 = con.prepareStatement(sendOld);
@@ -62,15 +64,17 @@
 				ps4.execute();
 			}
 		}
-		String seq2= "SELECT * FROM ItemsForSale WHERE endingDate <= NOW()";
-		PreparedStatement ps2 = con.prepareStatement(seq);
-		ResultSet rs2 = ps.executeQuery();
+		
+		String seq2= "SELECT * FROM ItemsForSale WHERE endingDate >= NOW()";
+		PreparedStatement ps2 = con.prepareStatement(seq2);
+		ResultSet rs2 = ps2.executeQuery();
 		while(rs2.next()) {
 			itemid = rs2.getInt("itemid");
-			String sendMessage = "INSERT INTO messages(username, message, timestamp) VALUES (?,?,NOW())";
+			String sendMessage = "INSERT INTO messages(sentTo, message, timestamp, sentFrom) VALUES (?,?,NOW(), ?)";
 			PreparedStatement ps5 = con.prepareStatement(sendMessage);
 			ps5.setString(1, (String) session.getAttribute("userid"));
-			ps5.setString(2, "Your item, item #" + rs.getInt("itemid") + " was not sold");
+			ps5.setString(2, "Your item, item #" + itemid + " was not sold");
+			ps5.setString(3, "SYSTEM");
 			ps5.executeUpdate();
 			String sendOld = "INSERT INTO oldListings(itemid, timeSold) VALUES (?, NOW())";
 			PreparedStatement ps3 = con.prepareStatement(sendOld);
@@ -82,5 +86,7 @@
 			ps4.execute();
 		}
 	            %>
+	        Data refresh successful, click here to return to your account page -> 
+	        <tr><a href='success.jsp'>My Account</a></tr>
 </body>
 </html>

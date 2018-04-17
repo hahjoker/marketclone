@@ -19,6 +19,8 @@
             If you're not registered with us yet -> <a href="reg.jsp">Register Here</a>
             <div></div>
             To search active listings, click here! -> <a href="search.jsp">Search</a>
+            <div></div>
+            To refresh page data, click here! -> <a href='manualRefresh.jsp'>Refresh Page Data</a>
         </form>
         </div>
         </div>
