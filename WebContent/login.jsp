@@ -24,8 +24,12 @@
         session.setAttribute("userid", user);
         int i = rs.getInt(7);
         if(i == 1)
+        {
         	response.sendRedirect("success.jsp");
+        	session.setAttribute("isAdmin", "");
+        }
         else{
+        	session.setAttribute("isAdmin", "TRUE");
             response.sendRedirect("adminpage.jsp");
         }
     }

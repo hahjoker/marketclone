@@ -23,7 +23,7 @@
                "hahjoker", "rootroot");
        String insert1="select * from qquestions where subcat = ?"; 
        PreparedStatement ps = con.prepareStatement(insert1);
-	 ps.setString(1, subcat);
+	 	ps.setString(1, subcat);
        ResultSet rs=ps.executeQuery();
        while(rs.next())
        {

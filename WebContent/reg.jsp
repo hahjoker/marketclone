@@ -20,6 +20,7 @@
 			<div></div>
 			<input type="password" name="password" value="" placeholder="Password"/>
 			<div></div>
+			<input type="hidden" name="admin" value="1">
 			<button type="submit" id="login-button">Register</button>
 			<div></div>
 			Already registered? <a href="index.jsp">Login Here</a>

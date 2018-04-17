@@ -14,6 +14,7 @@
 	String email = request.getParameter("email");
 	String user = request.getParameter("username");
 	String pass = request.getParameter("password");
+	String adminlock = request.getParameter("admin");
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
             "hahjoker", "rootroot");
@@ -24,7 +25,10 @@
   	ps.setString(3, email);
   	ps.setString(4, user);
   	ps.setString(5, pass);
-  	ps.setInt(6,1);
+  	if(adminlock.equals("0"))
+  		ps.setInt(6,0);
+  	else
+  		ps.setInt(6,1);
   	ps.setInt(7,1);
   	ps.executeUpdate();
   	con.close();
