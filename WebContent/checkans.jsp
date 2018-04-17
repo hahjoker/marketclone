@@ -18,7 +18,7 @@
    <%
    		int i;
    		if (request.getParameter("threadId")!= null)
-   		{
+   		{	
 		   	String subcat = request.getParameter("threadId");
 			i= Integer.parseInt(subcat);
 			session.setAttribute("threadId", subcat);
@@ -34,28 +34,20 @@
 	   Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
 	           "hahjoker", "rootroot");
 	   
-	   	String seq = "SELECT *  FROM post WHERE tid = ?";
+	   	String seq = "SELECT * FROM post WHERE tid=?";
 	   	PreparedStatement ps = con.prepareStatement(seq);
-	   	
 	   	ps.setInt(1, i);
 		    ResultSet rs = ps.executeQuery();
-		    boolean isMoreThanOneRow = rs.first() && rs.next();
-		    System.out.println(isMoreThanOneRow);
-		    if(!rs.next())
-		    {
-		    	%><tr><td>No answers yet</td><%
-		    	if(session.getAttribute("isrep") == (Object)1){%>
-		           <form action="answer.jsp" method = "post">
-		 		  	
-			            <td id="buttonrow">
-	           				 <input type="submit" value="reply">
-	        			</td>
-	        			<input type="hidden" name="threadId" value="<%=i%>">
-		            
-		            </form><%
-		    }
-		    }
-		    else{
+			if(session.getAttribute("isrep") == (Object)1){%>
+			      <form action="answer.jsp" method = "post">
+				
+			        <td id="buttonrow">
+			     				 <input type="submit" value="reply">
+			  			</td>
+			  			<input type="hidden" name="threadId" value="<%=i%>">
+			       
+			       </form><%
+			}
 		   while (rs.next()) {
 			   
 			   %>
@@ -77,7 +69,7 @@
 	           %>
 	           </tr>
 	   		<% 
-		   }}
+		   }
 		   rs.close();
 	        con.close();
    %>

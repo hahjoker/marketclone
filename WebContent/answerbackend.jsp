@@ -18,11 +18,12 @@
 	   Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
 	           "hahjoker", "rootroot");
 	   
-	   String insert1= "INSERT INTO post (message, created, tid, user) VALUES (?, NOW(), ?, ?)";
+	   String insert1= "INSERT INTO post (message, created, tid, user) VALUES (?, ?, ?, ?)";
 	  	PreparedStatement ps = con.prepareStatement(insert1);
 	  	ps.setString(1, message);
-	  	ps.setInt(2, i);
-	  	ps.setString(3, uname);
+	  	ps.setInt(3, i);
+	  	ps.setTimestamp(2, new java.sql.Timestamp(new java.util.Date().getTime()));
+	  	ps.setString(4, uname);
 	  	ps.executeUpdate();
 	        con.close();
 	        response.sendRedirect("checkans.jsp");
