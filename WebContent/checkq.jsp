@@ -27,10 +27,20 @@
        ResultSet rs=ps.executeQuery();
        while(rs.next())
        {
-   %>
+   %>		
+   <form action="checkans.jsp" method = "post">
+	 		  	
+			
+		            
            <tr><td><%out.print(rs.getString("subject"));%></td>
            <td><%out.print(rs.getString("subcat")); %></td>
-           <td><%out.println(rs.getString("userid"));%></td></tr>
+           <td><%out.println(rs.getString("userid"));%></td>
+           <td id="buttonrow">
+           				 <input type="submit" value="See Answers">
+        			</td>
+        			<input type="hidden" name="threadId" value="<%=rs.getInt("t_id")%>">
+	            
+	            </form></tr>
 
    <%
        }

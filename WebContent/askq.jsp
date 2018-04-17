@@ -13,7 +13,7 @@
         <form class="form" method="post" id="qform" action="askqbackend.jsp">
             <input type="text" name="subject" value="" placeholder="Question"/>
             <div></div>
-            <input type="hidden" name="uname" value="ds" placeholder=""/>
+            <input type="hidden" name="uname" value="<%=session.getAttribute("userid")%>" placeholder=""/>
             <div></div>
             <select name="subcat" form="qform">
 					    <option value="Android">Android</option>

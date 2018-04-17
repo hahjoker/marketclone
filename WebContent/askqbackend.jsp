@@ -23,7 +23,6 @@
   	ps.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
   	ps.executeUpdate();
   	con.close();
-  	out.print("man can dream???");
 %>
 </body>
 </html>
