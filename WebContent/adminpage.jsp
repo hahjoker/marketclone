@@ -9,7 +9,7 @@
 </head>
 <body>
 <%
-    if ((session.getAttribute("isAdmin") == null) || (session.getAttribute("userid") == "")) {
+    if ((session.getAttribute("isAdmin") != null) || (session.getAttribute("userid") == "")) {
 %>
 You are not Admin<br/>
 <a href="index.jsp">Bye</a>
