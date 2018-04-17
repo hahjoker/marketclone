@@ -29,7 +29,7 @@
   	  	con.close();
   	  	
   	
-  	response.sendRedirect("auctionCreate.jsp");
+  	response.sendRedirect("search.jsp");
 %>
 </body>
 </html>

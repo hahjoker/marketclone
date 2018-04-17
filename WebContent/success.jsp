@@ -11,7 +11,7 @@
     if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) {
 %>
 You are not logged in.<br/>
-<a href="index.jsp">Please Login.</a>
+<a href="login.jsp.jsp">Please Login.</a>
 <%
 } else {
 %>
@@ -20,7 +20,11 @@ Welcome
 session.getAttribute("userid")
 %>
 <div></div>
+<a href='yourListings.jsp'>Your Active Listings</a>
+<div></div>
 <a href='itemFrontEnd.jsp'>Create new Listing</a>
+<div>
+<a href='search.jsp'>Search active Listings</a></div>
 <div></div>
 <a href='logout.jsp'>Log out</a>
 <%    }

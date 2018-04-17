@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bid History</title>
+<title><h3>Bid History</h3></title>
 </head>
 <body>
 	<%@ page import="java.sql.*"%>
@@ -28,6 +28,7 @@
 	            "hahjoker", "rootroot");
 	    
 	   	String itemid = request.getParameter("itemid");
+	   	String itemname = request.getParameter("itemname");
 
 	    String seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE itemid = ?";
 		PreparedStatement ps = con.prepareStatement(seq);
@@ -65,6 +66,7 @@
 			</td>
 
 		</tr>
+		</table>
 		<% String seq2= "SELECT bidPerson, bidDate, bidAmount FROM bidsPlaced WHERE itemid = ?";
 		PreparedStatement ps2 = con.prepareStatement(seq2);
 		ps2.setInt(1, Integer.parseInt(itemid));
@@ -72,20 +74,31 @@
 		ResultSet rs2 = ps2.executeQuery(); 
 		if(!rs2.next()){%>
 		<td>
-			<%out.println("No bids yet!");%>
+			<h3>No Bids Yet!</h3>
 		</td>
 		<%} else {
 		while (rs2.next()) { %>
+		<table>
 		<tr>
+			Bid History:
+		<tr>
+		<tr>
+				<form action="bidPersonHistory.jsp" method = "post">
+	 		  		<%String usernameHistory = rs2.getString("bidPerson");%>
+	 		  		<td><%out.println(usernameHistory);%></td>
+		            <td id="buttonrow">
+           				 <input type="submit" value="See Bid History">
+        			</td>
+        			<input type="hidden" name="usernameHistory" value="<%=usernameHistory%>">
+	            </form>
 			<td>
-				<%out.println(rs.getString("bidPerson"));%>
+				<%out.print(rs2.getTimestamp("bidDate"));%>
 			</td>
 			<td>
-				<%out.print(rs.getString("bidDate"));%>
+				<%out.print(rs2.getDouble("bidAmount"));%>;
 			</td>
-			<td>
-				<%out.print(rs.getString("bidAmount"));%>;
-			</td>
+			</tr>
+			</table>
 			<%}
 			}%>
 			<form action="BidCreate.jsp" method="post">
@@ -94,8 +107,8 @@
 					<td id="buttonrow"><input type="submit" value="Place Bid">
 					</td>
 				</tr>
-				<input type="hidden" name="itemid"
-					value="<%= itemid %>">
+				<input type="hidden" name="itemid" value="<%=itemid%>">
+				<input type="hidden" name="itemname" value="<%=itemname%>">
 			</form>
 		
 </body>

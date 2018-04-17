@@ -51,6 +51,18 @@
 					</select>	
 				</td>
 			</tr>
+			<tr>
+				<td> 
+					Sort By:
+				</td>
+				<td>
+					<select name="sortby">
+					    <option value="0"> </option>
+					    <option value="Lowest Price">Lowest Price</option>
+					    <option value="Highest Price">Highest Price</option>
+					</select>	
+				</td>
+			</tr>
 		</table>		
 		<div style="text-align:center; margin:2%">
 			<input type = "submit" value = "Search"/>	

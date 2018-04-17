@@ -9,6 +9,12 @@
 <body>
 <%@ page import ="java.sql.*" %>
 	<h1 style="text-align:center; font-family:sans-serif;">Phones on Auction:</h1>
+	<form action="askq.jsp" method="post">
+			<tr>
+				<td id="buttonrow"><input type="submit" value="Have any questions?">
+				</td>
+			</tr>
+	</form>
 	 <table border="2" align = "center">
 	    <tr>
 	         <td><b>For Sale By</b></td>
@@ -25,8 +31,18 @@
 		String OS = request.getParameter("OS");
 		String manufacturer = request.getParameter("manufacturer");
 		String condition = request.getParameter("condition");
+		String sortby = request.getParameter("sortby");
 		
-
+		String row = "";
+		String upordown = "";
+		if(sortby.equals("Lowest Price")){
+			row = "buyNow";
+			upordown = "ASC";
+		}
+		else{
+			row = "buyNow";
+			upordown = "DESC";
+		}
 		
 		Class.forName("com.mysql.jdbc.Driver");
 	    Connection con = DriverManager.getConnection("jdbc:mysql://ilovedb.ckpzn75wp0we.us-east-1.rds.amazonaws.com/alphanum",
@@ -36,43 +52,74 @@
 	    	ResultSet rs;
 	    	PreparedStatement ps = null;
 	    	if(OS.equals("0") && !manufacturer.equals("0") && !condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and conditionPhone = ?";
+	    		if(upordown.equals("ASC"))
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and conditionPhone = ? ORDER BY buyNow ASC";
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and conditionPhone = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 	    		ps.setString(1, manufacturer);
 		  	  	ps.setString(2, condition);
+
 	    	} else if(!OS.equals("0") && manufacturer.equals("0") && !condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE conditionPhone = ? and phoneOS = ?";
+	    		if(upordown.equals("ASC"))
+					seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE conditionPhone = ? and phoneOS = ? ORDER BY buyNow ASC";
+	    		else
+					seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE conditionPhone = ? and phoneOS = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 	    		ps.setString(1, condition);
 		  	  	ps.setString(2, OS);
+
 	    	} else if(!OS.equals("0") && !manufacturer.equals("0") && condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and phoneOS = ?";
+	    		if(upordown.equals("ASC"))
+					seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and phoneOS = ? ORDER BY buyNow ASC";	
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and phoneOS = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 	    		ps.setString(1, manufacturer);
 		  	  	ps.setString(2, OS);
+
 	    	} else if(!OS.equals("0") && manufacturer.equals("0") && condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE phoneOS = ?";
+	    		if(upordown.equals("ASC"))	
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE phoneOS = ? ORDER BY buyNow ASC";
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE phoneOS = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 		  	  	ps.setString(1, OS);
 	    	} else if(OS.equals("0") && !manufacturer.equals("0") && condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ?";
+	    		if(upordown.equals("ASC"))
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? ORDER BY buyNow ASC";
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 		  	  	ps.setString(1, manufacturer);
 	    	} else if(OS.equals("0") && manufacturer.equals("0") && !condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE condition = ?";
+	    		if(upordown.equals("ASC"))
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE condition = ? ORDER BY buyNow ASC";
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE condition = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 		  	  	ps.setString(1, condition);
 	    	} else if(OS.equals("0") && manufacturer.equals("0") && condition.equals("0")) {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale";
+	    		if(upordown.equals("ASC"))
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale ORDER BY buyNow ASC";
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
+	    		ps.setString(1,row);
+		  	  	ps.setString(2,upordown);
 	    	} else {
-	    		seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and conditionPhone = ? and phoneOS = ?";
+	    		if(upordown.equals("ASC"))
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and conditionPhone = ? and phoneOS = ? ORDER BY buyNow ASC";
+	    		else
+	    			seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE manufacturer = ? and conditionPhone = ? and phoneOS = ? ORDER BY buyNow DESC";
 	    		ps = con.prepareStatement(seq);
 	    		ps.setString(1, manufacturer);
 		  	  	ps.setString(2, condition);
 		  	  	ps.setString(3, OS);
+		  	   
 	    	}
 	 	    rs = ps.executeQuery();
+	 	    
 	 	    ResultSetMetaData rsmd = rs.getMetaData();
 	 	   int columnsNumber = rsmd.getColumnCount();
 	 	   while (rs.next()) {

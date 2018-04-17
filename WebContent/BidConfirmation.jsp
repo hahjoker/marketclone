@@ -17,16 +17,21 @@
 	   	Double bidAmount = Double.valueOf(request.getParameter("bidAmount"));
 	   	String userid = (String) session.getAttribute("userid");
 	   	
-	   	String sql= "SELECT MAX(bidAmount) FROM phones NATURAL JOIN ItemsForSale WHERE itemid = ?";
+	   	String sql= "SELECT MAX(bidAmount) FROM bidsPlaced WHERE itemid = ?";
 	   	PreparedStatement findMax = con.prepareStatement(sql);
 	   	findMax.setInt(1, Integer.parseInt(itemid));
 	   	ResultSet max = findMax.executeQuery();
-	   	if(bidAmount < max.getDouble("bidAmount")) {
-	   		%>out.println("The Bid Amount must be greater than the current bid. <a href='BidHistory.jsp'>Try again</a>");<%
-	   	} else {
-	   	String itemname = request.getParameter("itemname");
-	   	System.out.println(itemname + "bc");
-
+	   	max.next();
+	   	if(bidAmount < max.getDouble("MAX(bidAmount)")) {
+	   		%>The Bid Amount must be greater than the current bid.
+	   		<form action="BidCreate.jsp" method="post">
+			<tr>
+				<input type="hidden" name="itemid" value="<%=itemid %>">
+				<td id="buttonrow"><input type="submit" value="Try Again">
+				</td>
+			</tr>
+		</form>
+	   	<%} else {
 	    String seq= "SELECT * FROM phones NATURAL JOIN ItemsForSale WHERE itemid = ?";
 		PreparedStatement ps = con.prepareStatement(seq);
 		ps.setInt(1, Integer.parseInt(itemid));
@@ -34,7 +39,7 @@
 		<tr>
 			<td>
 			<h3>Congratulations!</h3> 
-				You have successfully placed a bid on <%out.println(itemname);%> for <%out.println(bidAmount.toString());%>
+				You have successfully placed a bid for <%out.println(bidAmount.toString());%>
 			</td>
 
 		</tr>
