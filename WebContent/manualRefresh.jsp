@@ -65,7 +65,7 @@
 			}
 		}
 		
-		String seq2= "SELECT * FROM ItemsForSale WHERE endingDate >= NOW()";
+		String seq2= "SELECT * FROM ItemsForSale WHERE endingDate <= NOW()";
 		PreparedStatement ps2 = con.prepareStatement(seq2);
 		ResultSet rs2 = ps2.executeQuery();
 		while(rs2.next()) {
